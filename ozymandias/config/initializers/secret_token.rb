@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Ozymandias::Application.config.secret_token = 'fe206b1f30dec83d5bd7b8ab0b06ad0a35979f2de45dfc8b843e4b70fb4a3587f527b70ea21cf3bbce5205e07fea7385d46c132422e04c2185c8ad14629c4ea8'
+Ozymandias::Application.config.secret_token = '4a4ac8e01bfc37c6b9380caff335dfdc322e408df4a96a83d82a1378ff16b797a0c6ea15461ee546cd2558b2df61d4a1e8824089613cce0d1c8199079cb341f3'
