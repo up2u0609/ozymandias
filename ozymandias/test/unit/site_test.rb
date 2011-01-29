@@ -18,6 +18,6 @@ class SiteTest < ActiveSupport::TestCase
     assert site.site_tracks.include?(site_track)
   end
   test "should can find image which display recent track" do
-    assert_equal sites(:one).track_data_image_name , "#{sites(:one).name}_#{sites(:one).site_tracks.latest.first.created_at.to_i}_1.png"
+    assert_equal sites(:one).track_data_image_name , "#{sites(:one).name}_#{sites(:one).id}_1.png"
   end
 end

@@ -10,3 +10,6 @@
  every 5.minutes do
    runner "ScheduledConnecting.new.process"
  end
+ every 3.minutes do
+   runner "TrackDataImageUpdater.new.process"
+ end

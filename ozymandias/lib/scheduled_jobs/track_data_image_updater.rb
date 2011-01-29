@@ -1,23 +1,32 @@
 class TrackDataImageUpdater
-  TIME_RANGE = [1 , 3 , 6 , 12 , 24 , 24*3 , 24*6 , 24*30]
   def process
     Site.trackable_sites.each do|s|
-      TIME_RANGE.each do|t|
-        g = Gruff::Line.new(400)
+      SiteTrack::TRACK_TIME_RANGE.each do|t|
+        g = Gruff::Area.new(500)
         g.title = "track of #{s.name} (#{s.url})"
-        g.theme = {
-          :colors => ['black', 'grey'],
-          :marker_color => 'grey',
-          :font_color => 'black',
-          :background_colors => 'white'
-        }
+        
+        data_size = t * 12
+        ary = s.site_tracks.in_recent_hours(t).collect(&:speed)
+        until ary.size >= data_size
+          ary << 0
+        end
+        g.data(s.name.to_sym, ary)
+        
         labels = {}
-        (0..t).to_a.each{|i|
-          labels[i] = i.hours.ago.to_s(:db)
-        }
+        case t
+        when 1..24
+          (0..t).to_a.each do|h|
+             labels[data_size * h/t] = "#{h} H"
+          end
+        when 24*3..24*30
+           (0..(t/24)).to_a.each do|h|
+             labels[data_size*h*24/t] = "#{h}D"
+            end
+        end
         g.labels = labels
-        g.data(s.name.to_sym, s.site_tracks.in_recent_hours(t).collect(&:speed))
-        g.write(File.join(APP_CONFIG["track_data_images_dir"] , s.track_data_image_name(t)))
+        image_path = File.join(APP_CONFIG["track_data_images_dir"] , s.track_data_image_name(t))
+        File.rm image_path if File.exist? image_path
+        g.write(image_path)
       end
     end
   end

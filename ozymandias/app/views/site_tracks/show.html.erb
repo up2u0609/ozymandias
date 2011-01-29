@@ -1,0 +1,5 @@
+<%for s in @sites %>
+  <h1>track of <%=s.name%>(<%=s.url%>)</h1>
+  <div id="track_data_image_<%=s.id%>"></div>
+  <%=raw render_time_range_link(s)%>
+<%end%>
