@@ -1,0 +1,3 @@
+class TrackDataImageUpdater
+  
+end
