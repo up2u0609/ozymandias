@@ -1,5 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 require 'rails/all'
+require 'erb'
+require 'yaml'
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
@@ -33,6 +35,9 @@ module Ozymandias
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
+    raw_config = File.read(File.join(Rails.root , "config" , "config.yml"))
+    erb_config = ERB.new(raw_config).result
+    Object.const_set "APP_CONFIG" , YAML.load(erb_config)[Rails.env]
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]

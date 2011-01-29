@@ -13,4 +13,9 @@ two:
   speed: 1
   http_status_code: 200
   site: one
+three: 
+  speed: 1
+  http_status_code: 200
+  site: two
+  created_at: <%= 2.hours.ago%>  
 

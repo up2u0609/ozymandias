@@ -1,5 +1,9 @@
 class SiteTracksController < ApplicationController
   def show
-    @sites = Site.trackable_sites
+    if params[:id].blank?
+      @sites = Site.trackable_sites
+    else
+      @site = Site.find(params[:id].to_i)
+    end
   end
 end

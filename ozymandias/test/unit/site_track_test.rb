@@ -9,4 +9,8 @@ class SiteTrackTest < ActiveSupport::TestCase
   test "should return latest" do
     assert_equal SiteTrack.latest.first , site_tracks(:two)
   end
+  test "should return in_recent_hours" do
+    assert SiteTrack.in_recent_hours(1).include?(site_tracks(:one))
+    assert !SiteTrack.in_recent_hours(1).include?(site_tracks(:three))
+  end
 end
