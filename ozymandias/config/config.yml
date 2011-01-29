@@ -1,0 +1,8 @@
+common: &common
+development:
+  <<: *common
+  site_track_static_dir: <%= Rails.root + '/tmp/track_data' %>
+test:
+  <<: *common
+  site_track_static_dir: <%= Rails.root + '/test/fixtures/files/track_data' %>
+production:
